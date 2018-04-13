@@ -38,15 +38,21 @@ def list_courses(request):
 
 
 def prime(request):
+    context = dict()
+    context["message"] = ""
     if request.method == "GET":
-        return render(request, 'demo/prime.html', {"message", ""})
-    else:
+        return render(request, 'demo/prime.html', context)
+    else:  # POST
         # read data and process
-        num = int(request.POST["num"])  # convert string to int
-        message = "A Prime Number"
-        for i in range(2, math.sqrt(num) + 1):
-            if num % i == 0:
-                message = "Not A Prime Number"
-                break
+        context["num"] = request.POST["num"]
+        try:
+            num = int(request.POST["num"])  # convert string to int
+            context["message"] = "A Prime Number"
+            for i in range(2, math.trunc(math.sqrt(num) + 1)):
+                if num % i == 0:
+                    context["message"] = "Not A Prime Number"
+                    break
+        except:
+            context["message"] = "Sorry! Could not convert given input to number!"
 
-        return render(request, 'demo/prime.html', {"message": message})
+        return render(request, 'demo/prime.html', context)
