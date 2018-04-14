@@ -2,6 +2,7 @@
 from django.contrib import admin
 from django.urls import path
 from demo.views import hello, wish, course, list_courses, prime
+from demo.cookie_views import show, selectcolor
 
 urlpatterns = [
     path('hello/', hello),
@@ -9,4 +10,6 @@ urlpatterns = [
     path('course/', course),
     path('listcourses/', list_courses),
     path('prime/', prime),
+    path('show/', show),
+    path('selectcolor/', selectcolor),
 ]

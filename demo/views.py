@@ -56,3 +56,6 @@ def prime(request):
             context["message"] = "Sorry! Could not convert given input to number!"
 
         return render(request, 'demo/prime.html', context)
+
+
+

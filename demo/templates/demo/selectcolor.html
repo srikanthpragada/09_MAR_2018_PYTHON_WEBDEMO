@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Select Color</title>
+</head>
+<body>
+<h2>Select Color</h2>
+<form method="POST">
+    {% csrf_token %}
+    Color :
+    <select name="color">
+        <option>Red</option>
+        <option>Blue</option>
+        <option>White</option>
+        <option>Black</option>
+        <option>Green</option>
+    </select>
+    <p></p>
+    <input type="submit" value="Submit"/>
+</form>
+</body>
+</html>
