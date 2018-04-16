@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Select City</title>
+</head>
+<body>
+<h2>Select Color</h2>
+<form method="POST">
+    {% csrf_token %}
+    Color :
+    <select name="city">
+           {% for c in cities %}
+              <option>{{c}}</option>
+           {% endfor %}
+    </select>
+    <p></p>
+    <input type="submit" value="Submit"/>
+</form>
+</body>
+</html>
