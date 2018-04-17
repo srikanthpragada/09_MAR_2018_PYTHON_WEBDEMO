@@ -36,7 +36,7 @@ def selectcity(request):
         # create a cookie with name color and value of color variable
         response = HttpResponseRedirect("/demo/showmovies")
         response.set_cookie("city", city,
-          expires=datetime.datetime.now() + datetime.timedelta(days=10))
+                            expires=datetime.datetime.now() + datetime.timedelta(days=10))
         return response
 
 
@@ -51,3 +51,22 @@ def showmovies(request):
     # print all movies
     return render(request, 'demo/showmovies.html',
                   {'city': city, 'movies': Movies.get_movies(city)})
+
+
+def languages(request):
+    if 'langs' in request.session:
+        langs = request.session['langs']
+    else:
+        langs = []
+
+    if request.method == "POST":
+        lang = request.POST["lang"]
+        langs.append(lang)
+        request.session["langs"] = langs
+
+    print(langs)
+    return render(request, 'demo/languages.html', {'langs': langs})
+
+def clear(request):
+    del request.session["langs"]
+    return HttpResponse("Languages cleared!")
