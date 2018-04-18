@@ -3,7 +3,7 @@ from django.urls import path
 from demo.views import hello, wish, course, list_courses, prime
 from demo.cookie_views import show, selectcolor, selectcity, \
     showmovies, languages, clear
-from .hr_views import add_dept
+from .hr_views import add_dept, list_dept, list_emp
 
 urlpatterns = [
     path('hello/', hello),
@@ -18,4 +18,6 @@ urlpatterns = [
     path('langs/', languages),
     path('clear/', clear),
     path('add_dept/', add_dept),
+    path('list_dept/', list_dept),
+    path('list_emp/', list_emp),
 ]

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List of Departments</title>
+</head>
+<body>
+<h1>List Of Departments</h1>
+<table cellpadding="5pt" border="1">
+    <tr>
+        <th>Dept Id</th>
+        <th>Dept Name</th>
+        <th></th>
+    </tr>
+
+    {% for d in depts %}
+    <tr>
+        <td> {{ d.0 }}</td>
+        <td> {{ d.1 }}</td>
+        <td> <a href="/demo/list_emp?deptid={{d.0}}">Employees</a> </td>
+    </tr>
+    {% endfor %}
+</table>
+
+</body>
+</html>
