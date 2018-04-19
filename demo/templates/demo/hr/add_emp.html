@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Employee</title>
+</head>
+<body>
+<h1>Add Employee</h1>
+<form method="post" novalidate>
+    {% csrf_token %}
+    {{form.ename.label}} <br/>
+    {{form.ename}}
+    <p></p>
+    {{form.salary.label}} <br/>
+    {{form.salary}}
+    <p></p>
+    {{form.dept.label}} <br/>
+    {{form.dept}}
+    <p></p>
+    <input type="submit" value="Add Employee" />
+</form>
+<p></p>
+{% if message %}
+   {{message}}
+{% endif %}
+
+<a href="/demo/list_all_emp/">Employees</a>
+</body>
+</html>

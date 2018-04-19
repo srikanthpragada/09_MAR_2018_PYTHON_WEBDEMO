@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List of Employees </title>
+</head>
+<body>
+<h1>List Of Employees</h1>
+
+<h3>Department id : {{deptid}} </h3>
+
+<table cellpadding="5pt" border="1">
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Salary</th>
+    </tr>
+
+    {% for e in employees %}
+    <tr>
+        <td> {{ e.0 }}</td>
+        <td> {{ e.1 }}</td>
+        <td> {{ e.2 }} </td>
+    </tr>
+    {% endfor %}
+</table>
+
+</body>
+</html>

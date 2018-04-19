@@ -1,9 +1,24 @@
 from django.shortcuts import render, HttpResponse, HttpResponseRedirect
-from .forms import AddDeptForm
+from .forms import AddDeptForm, AddEmpForm
 import sqlite3
 
-def list_emp(request):
-    print(request.GET.get("deptid",1))
+
+def list_emp(request, id):
+    employees = []
+    try:
+        con = sqlite3.connect(r"e:\classroom\python\hr.db")
+        cur = con.cursor()
+        # take input from user
+        cur.execute("select * from emp where deptid = ?", (id))
+        employees = cur.fetchall()
+    except Exception as ex:
+        print("Error : ", ex)
+    finally:
+        con.close()
+
+    return render(request, 'demo/hr/list_emp.html',
+                  {"employees": employees, 'deptid': id})
+
 
 def list_dept(request):
     depts = []
@@ -47,3 +62,40 @@ def add_dept(request):
     else:  # GET
         form = AddDeptForm()  # empty form
         return render(request, 'demo/hr/add_dept.html', {'form': form})
+
+def add_emp(request):
+    if request.method == "POST":
+        form = AddEmpForm(request.POST)
+        message = ""
+        if form.is_valid():
+            ename = form.cleaned_data["ename"]
+            salary = form.cleaned_data["salary"]
+            dept = form.cleaned_data["dept"]
+
+            # insert row into EMP table
+            try:
+                con = sqlite3.connect(r"e:\classroom\python\hr.db")
+                cur = con.cursor()
+                # Find out next empid
+                cur.execute("select max(empid) + 1 from emp")
+                empid = cur.fetchone()[0]
+                cur.execute("insert into emp values(?,?,?,?)",
+                            (empid, ename, salary,dept))
+                con.commit()
+                message = "Employee [%d] has been inserted!" % (empid)
+            except Exception as ex:
+                print("Error : ", ex)
+                message = "Error : " + str(ex)
+            finally:
+                con.close()
+        else:
+            print(form.errors)
+
+        return render(request, 'demo/hr/add_emp.html',
+                      {'form': form,'message' : message})
+    else:
+        form = AddEmpForm()  # empty form
+        return render(request, 'demo/hr/add_emp.html', {'form': form})
+
+def use_jquery(request):
+    return render(request, 'demo/jquery_test.html')
