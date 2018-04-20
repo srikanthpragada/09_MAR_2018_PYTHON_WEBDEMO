@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>Ajax Demo with jQuery</title>
+    <!--
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.js"></script>
+    -->
+    <link rel="stylesheet" href='{% static "demo/styles.css" %}' />
+    <script src='{% static "demo/jquery-3.2.1.js" %}'></script>
+    <script>
+        function getTime() {
+             // get(url,data,callback)
+             $.get("/demo/today",{},showResult);
+        }
+        function showResult(result) {
+             $("#now").text(result)
+        }
+    </script>
+</head>
+<body>
+<h1>Ajax Demo</h1>
+<button onclick="getTime()">What is Now?</button>
+<h2 id="now"></h2>
+<hr/>
+
+</body>
+</html>

@@ -1,4 +1,5 @@
 from django.shortcuts import render, HttpResponse, HttpResponseRedirect
+from django.http import JsonResponse
 from .forms import AddDeptForm, AddEmpForm
 import sqlite3
 
@@ -63,6 +64,7 @@ def add_dept(request):
         form = AddDeptForm()  # empty form
         return render(request, 'demo/hr/add_dept.html', {'form': form})
 
+
 def add_emp(request):
     if request.method == "POST":
         form = AddEmpForm(request.POST)
@@ -80,7 +82,7 @@ def add_emp(request):
                 cur.execute("select max(empid) + 1 from emp")
                 empid = cur.fetchone()[0]
                 cur.execute("insert into emp values(?,?,?,?)",
-                            (empid, ename, salary,dept))
+                            (empid, ename, salary, dept))
                 con.commit()
                 message = "Employee [%d] has been inserted!" % (empid)
             except Exception as ex:
@@ -92,10 +94,27 @@ def add_emp(request):
             print(form.errors)
 
         return render(request, 'demo/hr/add_emp.html',
-                      {'form': form,'message' : message})
+                      {'form': form, 'message': message})
     else:
         form = AddEmpForm()  # empty form
         return render(request, 'demo/hr/add_emp.html', {'form': form})
 
-def use_jquery(request):
-    return render(request, 'demo/jquery_test.html')
+def search(request):
+    return render(request, 'demo/hr/search_emp.html')
+
+def get_employees(request, name):
+    name = "%" + name + "%"
+    print(name)
+    employees = []
+    try:
+        con = sqlite3.connect(r"e:\classroom\python\hr.db")
+        cur = con.cursor()
+        # take input from user
+        cur.execute("select * from emp where empname like ?",(name,))
+        employees = cur.fetchall()
+    except Exception as ex:
+        print("Error in search  : ", ex)
+    finally:
+        con.close()
+
+    return JsonResponse(employees, safe=False)

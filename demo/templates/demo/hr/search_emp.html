@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>Search Employees</title>
+    <link rel="stylesheet" href='{% static "demo/styles.css" %}'/>
+    <script src='{% static "demo/jquery-3.2.1.js" %}'></script>
+    <script>
+         function searchEmployees()
+         {
+            $.getJSON("/demo/get_employees/" + $("#name").val(),{},
+                 showEmployees);
+         }
+         function showEmployees(result) {
+            console.log(result);
+         }
+    </script>
+</head>
+<body>
+   <h2>Search Employees</h2>
+   Name <input type="text" id="name" />
+   <button onclick="searchEmployees()">Search</button>
+   <p></p>
+   <div id="employees">
+
+   </div>
+
+
+</body>
+</html>

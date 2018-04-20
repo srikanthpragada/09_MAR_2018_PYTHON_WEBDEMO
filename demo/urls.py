@@ -3,7 +3,8 @@ from django.urls import path, re_path
 from demo.views import hello, wish, course, list_courses, prime
 from demo.cookie_views import show, selectcolor, selectcity, \
     showmovies, languages, clear
-from .hr_views import add_dept, add_emp, list_dept, list_emp, use_jquery
+from .hr_views import add_dept, add_emp, list_dept, list_emp, search, get_employees
+import demo.ajax_views as ajax_views
 
 urlpatterns = [
     path('hello/', hello),
@@ -20,7 +21,11 @@ urlpatterns = [
     path('add_dept/', add_dept),
     path('add_emp/', add_emp),
     path('list_dept/', list_dept),
+    path('search_emp/', search),
+    path('today/', ajax_views.today),
+    path('ajax/', ajax_views.ajax),
     re_path(r'list_emp/(\d+)', list_emp),
-    path('jquery/', use_jquery)
+    re_path(r'get_employees/(\w+)', get_employees),
+
 
 ]
