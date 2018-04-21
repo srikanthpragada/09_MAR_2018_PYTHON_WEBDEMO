@@ -10,11 +10,31 @@
     <script>
          function searchEmployees()
          {
-            $.getJSON("/demo/get_employees/" + $("#name").val(),{},
+              if($("#name").val() == "")
+              {
+                   $("#error").text("Please enter name!")
+                   return;
+              }
+              $("#error").text("")
+
+              $.getJSON("/demo/get_employees/" + $("#name").val(),{},
                  showEmployees);
          }
          function showEmployees(result) {
-            console.log(result);
+              if (result.length == 0)
+              {
+                 $("#employees").html("Sorry! No employees found!");
+                 return;
+              }
+
+              $("#employees").html("");
+              output = "<ul>";
+              $.each(result,
+                  function(idx,emp) {
+                       output += "<li>" + emp.name + " - " + emp.salary + "</li>"
+                  }
+              );
+              $("#employees").html( output + "</ul>")
          }
     </script>
 </head>
@@ -22,6 +42,7 @@
    <h2>Search Employees</h2>
    Name <input type="text" id="name" />
    <button onclick="searchEmployees()">Search</button>
+   <span id="error"></span>
    <p></p>
    <div id="employees">
 

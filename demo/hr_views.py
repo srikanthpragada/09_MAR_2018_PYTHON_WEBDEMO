@@ -110,11 +110,14 @@ def get_employees(request, name):
         con = sqlite3.connect(r"e:\classroom\python\hr.db")
         cur = con.cursor()
         # take input from user
-        cur.execute("select * from emp where empname like ?",(name,))
-        employees = cur.fetchall()
+        cur.execute("select empname,salary from emp where empname like ?",(name,))
+        for row in cur.fetchall():
+            emp = { "name" : row[0], "salary" : row[1]}
+            employees.append(emp)
+
     except Exception as ex:
         print("Error in search  : ", ex)
     finally:
         con.close()
-
+    # Convert data to json and send to client
     return JsonResponse(employees, safe=False)

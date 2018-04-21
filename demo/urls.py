@@ -24,6 +24,7 @@ urlpatterns = [
     path('search_emp/', search),
     path('today/', ajax_views.today),
     path('ajax/', ajax_views.ajax),
+    re_path('getname/(\d+)', ajax_views.get_name),
     re_path(r'list_emp/(\d+)', list_emp),
     re_path(r'get_employees/(\w+)', get_employees),
 
