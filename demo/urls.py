@@ -5,6 +5,7 @@ from demo.cookie_views import show, selectcolor, selectcity, \
     showmovies, languages, clear
 from .hr_views import add_dept, add_emp, list_dept, list_emp, search, get_employees
 import demo.ajax_views as ajax_views
+import demo.orm_views as orm_views
 
 urlpatterns = [
     path('hello/', hello),
@@ -27,6 +28,7 @@ urlpatterns = [
     re_path('getname/(\d+)', ajax_views.get_name),
     re_path(r'list_emp/(\d+)', list_emp),
     re_path(r'get_employees/(\w+)', get_employees),
+    path('orm/list_dept/', orm_views.list_dept),
 
 
 ]

@@ -1,0 +1,21 @@
+{% extends 'demo/orm/master.html' %}
+{% block title %}List of Departments {% endblock %}
+{% block body %}
+<table cellpadding="5pt" border="1">
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Location</th>
+        <th></th>
+    </tr>
+
+    {% for d in depts %}
+    <tr>
+        <td> {{ d.id }}</td>
+        <td> {{ d.name }}</td>
+        <td> {{ d.location }}</td>
+        <td> <a href="/demo/orm/empbydept/{{d.id}}">Employees</a> </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

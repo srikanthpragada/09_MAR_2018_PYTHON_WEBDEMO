@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>HR Application</title>
+    <link rel="stylesheet" href='{% static "demo/styles.css" %}'/>
+</head>
+<body>
+<div class="banner">HR Application</div>
+<div class="menu">
+    <a href="/demo/orm/home">Home</a>
+    <a href="/demo/orm/add_dept">Add Dept</a>
+    <a href="/demo/orm/add_emp">Add Emp</a>
+    <a href="/demo/orm/list_dept">List Depts</a>
+    <a href="/demo/orm/list_emp">List Emps</a>
+</div>
+<h1>{% block title %}{% endblock %}</h1>
+{% block body %}{% endblock %}
+
+</body>
+</html>
