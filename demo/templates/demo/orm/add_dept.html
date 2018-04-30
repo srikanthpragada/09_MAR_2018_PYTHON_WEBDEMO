@@ -1,0 +1,16 @@
+{% extends 'demo/orm/master.html' %}
+
+{% block title %}Add Department {% endblock %}
+{% block body %}
+
+<form  method="post">
+    {% csrf_token %}
+
+    <table>
+        {{ form }}
+    </table>
+    <p></p>
+    <input type="submit" value="Add Dept" />
+</form>
+
+{% endblock %}

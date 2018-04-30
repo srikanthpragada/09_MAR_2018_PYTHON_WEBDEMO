@@ -28,7 +28,12 @@ urlpatterns = [
     re_path('getname/(\d+)', ajax_views.get_name),
     re_path(r'list_emp/(\d+)', list_emp),
     re_path(r'get_employees/(\w+)', get_employees),
+    re_path(r'orm/empbydept/(\d+)', orm_views.emp_by_dept),
     path('orm/list_dept/', orm_views.list_dept),
+    path('orm/list_emp/', orm_views.list_emp),
+    path('orm/add_dept/', orm_views.add_dept),
+    path('orm/home/', orm_views.home),
+    path('orm/add_emp/', orm_views.add_emp),
 
 
 ]
