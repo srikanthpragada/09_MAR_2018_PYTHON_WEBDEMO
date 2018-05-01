@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Department Client</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous">
+    </script>
+    <script>
+    url = "/demo/api/departments/";
+
+    function get_departments() {
+           // make ajax request to get all departments
+           $.ajax({ "url": url,
+             "success" : display_all_depts,
+             "error" : display_error }
+           );
+    }
+
+    function display_all_depts(result) {
+        console.log(result);
+        output  = "<ul>";
+
+        $.each(result,
+          function(idx,dept) {
+              output  += "<li>"  + dept.id + " - " + dept.name +
+              "  <a href='#' onclick='delete_dept("
+                 + dept.id + ")'>Delete</a></li>";
+          }
+        );
+
+        output += "</ul>";
+        $("#depts").html(output);
+    }
+
+    function display_error() {
+          alert("Sorry! Error. Couldn't retrive data!")
+    }
+
+    function delete_dept(id) {
+          $.ajax({ "url": url + id,
+                   "type" : "delete",
+                   "success": function()
+                              {
+                                alert("Deleted!");
+                                get_departments();
+                              }
+                 });
+    }
+
+   </script>
+</head>
+<body>
+
+<h1>Department Client</h1>
+<button onclick="get_departments()">Get Departments</button>
+<p></p>
+<div id="depts">
+
+</div>
+</body>
+</html>
