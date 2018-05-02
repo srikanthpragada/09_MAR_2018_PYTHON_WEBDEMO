@@ -7,6 +7,7 @@ from .hr_views import add_dept, add_emp, list_dept, list_emp, search, get_employ
 import demo.ajax_views as ajax_views
 import demo.orm_views as orm_views
 import demo.rest_views as rest_views
+import demo.class_views as class_views
 
 urlpatterns = [
     path('hello/', hello),
@@ -38,7 +39,7 @@ urlpatterns = [
     path('api/client/', rest_views.client),
     path('api/departments/', rest_views.list_dept),
     path('api/departments/<int:id>', rest_views.department_details),
-
-
+    path('now/', class_views.TodayView.as_view()),
+    path('deptlist/', class_views.DepartmentList.as_view()),
 
 ]
